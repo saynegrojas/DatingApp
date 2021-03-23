@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
+import { ValueService } from './service/value.service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { ValueComponent } from './value/value.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ValueService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

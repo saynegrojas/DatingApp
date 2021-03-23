@@ -52,7 +52,7 @@ namespace DatingApp.API
             }
 
             // define cors policy to allow headers
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://localhost:4200"));
             // app.UseMvc();
 
             // attemps to redirect to any request to https
