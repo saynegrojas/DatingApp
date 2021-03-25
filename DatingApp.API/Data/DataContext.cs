@@ -13,6 +13,7 @@ namespace DatingApp.API.Data
         // create a constructor
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
+        // where we stage our entity to be added to our db
         public DbSet<Value> Values { get; set; }
 
     }

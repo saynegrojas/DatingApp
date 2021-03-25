@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // Make our end to end communication between API and clients app work
 namespace DatingApp.API.Controllers
@@ -14,9 +15,8 @@ namespace DatingApp.API.Controllers
     // This is what's going to be mapped as our endpoint so that when we navigate or make request to this controller, our app knows where to route that request
     // [controller] in square bracket is a placeholder for what's inside the class name ValueController - public class ValuesController
     // when we browse to http: localhost:5000/api/values
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+
+    public class ValuesController : BaseApiController
     {
         // instead of returning static values, we want to go into our db retrieve values made in db and return to client
         // client we'll use to retreive is postman for now for testing
@@ -44,6 +44,8 @@ namespace DatingApp.API.Controllers
         // - get the Values - as a list ToList() 
         //- store it in values var(object) 
         //- return to client w/ http 200 OK response
+
+        [AllowAnonymous]
         [HttpGet]
         // turning to async returning a Task(represents async op that returns a value) with IActionResult
         // anything we're waiting for inside our method, it will keep the thread open and not block any of our request while waiting for response
@@ -72,6 +74,9 @@ namespace DatingApp.API.Controllers
 
         // GET api/values/5
         // Has a route parameter which we pass into our method as part of the HTTP get route 
+
+        // Authentication authorized attribute
+        [Authorize]
         [HttpGet("{id}")]
         // pass route param{id} to GetValue(id) as a param
         public async Task<IActionResult> GetValue(int id)

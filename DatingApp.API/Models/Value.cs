@@ -10,6 +10,11 @@ namespace DatingApp.API.Models
 
         // return string name Name
         public string Name { get; set; }
+
+        public string UserName { get; set; }
+
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
     }
 }
 // need to tell entity framework about this entity 'Value' so that it can scaffold our db and create a table for this class
