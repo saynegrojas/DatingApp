@@ -54,6 +54,19 @@ export class ValueService {
     }));
   }
 
+  // register sending post request to server
+  register(model: any) {
+    // call post to server
+    return this.http.post(this.url + 'account/register', model).pipe(map((data: User) => {
+      const user = data;
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUserSource.next(user);
+      }
+      return user;
+    }));
+  }
+
   // create a helper method
   setCurrentUser(user: User) {
     this.currentUserSource.next(user);

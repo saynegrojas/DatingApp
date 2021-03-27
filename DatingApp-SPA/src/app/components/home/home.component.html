@@ -1,1 +1,35 @@
-<p>home works!</p>
+<div class="container">
+  <!-- welcome area -->
+  <!-- if registerMode is not false = show this section -->
+  <div *ngIf="!registerMode" style="text-align: center;">
+    <h1>Find your match</h1>
+    <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
+    <div class="text-center">
+      <!-- toggle between registermodes -->
+      <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
+      <button class="btn btn-info btn-lg mr-2">Learn More</button>
+    </div>
+  </div>
+
+  <!-- register area -->
+  <!-- if registerMode is false = dont show -->
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <!-- [usersFromHome] parent to child -->
+        <!-- we use property binding & pass in the input reference
+            set it to the property in the parent component
+            this will allow us to pass data down to child from parent
+        -->
+
+        <!-- (cancelRegister) child to parent -->
+        <!-- we use the event binding prop, pass in the output reference
+            set it to a method we call from the parent component
+            finally, pass in an event that the method will receive from the child componenet
+            this will emit an event from the child up to the parent
+          -->
+        <app-register [usersFromHome]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+      </div>
+    </div>
+  </div>
+</div>
