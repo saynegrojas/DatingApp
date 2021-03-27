@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Dating App</a>
+    <!-- for responsive -->
+    <!-- <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <!-- hamburger responsive -->
+    <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
+      <!-- use structural directive to show only if user is logged in -->
+      <!-- we are subscribing to an observable using async pipe -->
+    <ul class="navbar-nav mr-auto" *ngIf="currentUser$ | async">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Matches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Lists</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+    </ul>
+
+<!-- dropdown for user info -->
+<div class="dropdown" *ngIf="currentUser$ | async" dropdown>
+  <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
+  <div class="dropdown-menu" *dropdownMenu>
+    <a class="dropdown-item">Edit Profile</a>
+    <div class="dropdown-divider"></div>
+    <!-- use click event binding for logout function -->
+    <a class="dropdown-item" (click)="logout()">Logout</a>
+  </div>
+</div>
+
+    <!-- template ref variable  -->
+    <!-- show form only when logged out -->
+    <form
+      *ngIf="(currentUser$ | async) === null"
+      #loginForm="ngForm"
+      class="form-inline mt-2 mt-md-0"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+      <!-- give name set to our prop we want to track
+          set the property we want to bind to with ngModel
+      -->
+      <input
+        name="userName"
+        [(ngModel)]="model.userName"
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Username"
+      />
+      <input
+        name="password"
+        [(ngModel)]="model.password"
+        class="form-control mr-sm-2"
+        type="password"
+        placeholder="Password"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Login
+      </button>
+    </form>
+  </div>
+  <!-- </div> -->
+</nav>
