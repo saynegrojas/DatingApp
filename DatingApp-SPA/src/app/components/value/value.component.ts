@@ -23,28 +23,28 @@ export class ValueComponent implements OnInit {
   //  lifecycle method
   ngOnInit(): void {
     // call the getValues when our component initializes get the values populated with the response back from server
-    this.getValues();
+    // this.getValues();
     // init setting current user when calling this component
-    this.setCurrentUser();
+    // this.setCurrentUser();
   }
 
-  getValues() {
-    this.valueService.getValue().subscribe({
-      next: data => {
-        this.values = data;
-      }, error: err => this.errorMessage = err,
-    });
-  }
+  // getValues() {
+  //   this.valueService.getValue().subscribe({
+  //     next: data => {
+  //       this.values = data;
+  //     }, error: err => this.errorMessage = err,
+  //   });
+  // }
 
-  // we going to look inside the browser localstorage & see if we have an object with a key of 'user'
-  // login will be persisted since we are getting the token from local storage (user object)
-  // & setting it to our valueService
-  setCurrentUser() {
-    // set current user to var & since we stringyfied the object as a JSON format, we are going to parse it to turn it back to original way
-    const user: User = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
-    this.valueService.setCurrentUser(user);
-  }
+  // // we going to look inside the browser localstorage & see if we have an object with a key of 'user'
+  // // login will be persisted since we are getting the token from local storage (user object)
+  // // & setting it to our valueService
+  // setCurrentUser() {
+  //   // set current user to var & since we stringyfied the object as a JSON format, we are going to parse it to turn it back to original way
+  //   const user: User = JSON.parse(localStorage.getItem('user'));
+  //   console.log(user);
+  //   this.valueService.setCurrentUser(user);
+  // }
 
   //
 
