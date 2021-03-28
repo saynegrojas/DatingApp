@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/_service/account.service';
 import { ValueService } from 'src/app/_service/value.service';
 
 @Component({
@@ -15,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private valueService: ValueService ) { }
+  constructor(private accountService: AccountService, private toastr: ToastrService ) { }
 
   ngOnInit(): void {
   }
@@ -23,11 +26,14 @@ export class RegisterComponent implements OnInit {
   // register a user
   register() {
     // call the register method from service
-    this.valueService.register(this.model).subscribe(data => {
+    this.accountService.register(this.model).subscribe(data => {
       console.log(data);
       // use conditional to hide & show component
       this.cancel();
-    }, error => console.log(error));
+    }, error => {
+      console.log(error);
+      this.toastr.error(error.error);
+    });
   }
 
   // method will go back to previous page

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Dating App</a>
+    <!-- adding routerlink to a tags to apply router-outlet routing -->
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active" >Dating App</a>
     <!-- for responsive -->
     <!-- <button
       class="navbar-toggler"
@@ -15,29 +16,33 @@
     </button> -->
     <!-- hamburger responsive -->
     <!-- <div class="collapse navbar-collapse" id="navbarCollapse"> -->
-      <!-- use structural directive to show only if user is logged in -->
+
+      <!--x use structural directive to show only if user is logged in -->
       <!-- we are subscribing to an observable using async pipe -->
-    <ul class="navbar-nav mr-auto" *ngIf="currentUser$ | async">
+      <ul class="navbar-nav mr-auto" >
+      <!-- put list inside ng-container(does not generate HTML so does not interfere with style, useful for conditionals) -->
+      <ng-container *ngIf="currentUser$ | async">
       <li class="nav-item">
-        <a class="nav-link" href="#">Matches</a>
+        <a class="nav-link"routerLink="/members" routerLinkActive="active">Matches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Lists</a>
+        <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
+        <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
       </li>
+      </ng-container>
     </ul>
 
 <!-- dropdown for user info -->
-<div class="dropdown" *ngIf="currentUser$ | async" dropdown>
-  <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
-  <div class="dropdown-menu" *dropdownMenu>
-    <a class="dropdown-item">Edit Profile</a>
-    <div class="dropdown-divider"></div>
-    <!-- use click event binding for logout function -->
-    <a class="dropdown-item" (click)="logout()">Logout</a>
-  </div>
+<div class="dropdown" dropdown *ngIf="(currentUser$ | async) as user">
+    <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase }}</a>
+    <div class="dropdown-menu" *dropdownMenu>
+      <a class="dropdown-item">Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <!-- use click event binding for logout function -->
+      <a class="dropdown-item" (click)="logout()">Logout</a>
+    </div>
 </div>
 
     <!-- template ref variable  -->
@@ -66,7 +71,7 @@
         type="password"
         placeholder="Password"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      <button class="btn btn-success my-2 my-sm-0" type="submit">
         Login
       </button>
     </form>

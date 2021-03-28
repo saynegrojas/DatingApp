@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/_model/user';
-import { ValueService } from 'src/app/_service/value.service';
+import { AccountService } from 'src/app/_service/account.service';
 
 @Component({
   selector: 'app-nav',
@@ -17,14 +19,16 @@ export class NavComponent implements OnInit {
   currentUser$: Observable<User>;
 
   // inject service
-  constructor(private valueService: ValueService) { }
+  // inject router to get navigation properties
+  // inject toastr to get access for notification
+  constructor(private accountService: AccountService, private router: Router, private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     // get current user when this component loads
     this.getCurrentUser();
 
-    // we set the currentuser$ observable to the currentUser value we get from valueService
-    this.currentUser$ = this.valueService.currentUser$;
+    // we set the currentuser$ observable to the currentUser value we get from accountService
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
   // use this method to get value from ngSubmit form
@@ -34,13 +38,18 @@ export class NavComponent implements OnInit {
     console.log(this.model);
 
     // call login method from service & subscribe to an observable
-    this.valueService.login(this.model).subscribe({
+    this.accountService.login(this.model).subscribe({
       next: res => {
+        // redirect user when they log in to a path we specify
+        this.router.navigateByUrl('/members');
         console.log(res);
         this.model = res;
         // this.loggedIn = true; //using async pipe
       },
-      error: err => console.log(err)
+      error: err => {
+        console.log(err);
+        this.toastr.error(err.error);
+      }
     });
     // clears the form fields when submit is fired
     this.model = '';
@@ -48,15 +57,19 @@ export class NavComponent implements OnInit {
 
   logout() {
     // call logout from service
-    this.valueService.logout();
+    this.accountService.logout();
     // this.loggedIn = false; // using async pipe
+
+    // redirect user when they log out to home page
+    this.router.navigateByUrl('/');
   }
 
 
   getCurrentUser() {
     // we interrogate valueService & see inside the current user observable
     // we subscribe to our created observable in value service & setting loggedin status to current user
-    this.valueService.currentUser$.subscribe(user => {
+    this.accountService.currentUser$.subscribe(user => {
+      console.log(user);
       // double ! turns our object into a boolean type
       // if there is a user, then true, if user is null then false
       // this.loggedIn = !!user; //using async pipe
