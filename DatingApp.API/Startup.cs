@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DatingApp.API.ApplicationServiceExtension;
 using DatingApp.API.IdentityServiceExtension;
+using DatingApp.API.Middleware;
 
 namespace DatingApp.API
 {
@@ -60,13 +61,16 @@ namespace DatingApp.API
         {
             // everything added in here is Middleware – software can use to interact with our req as it's going through pipeline
 
-            // condition to check if we're running on development mode
-            if (env.IsDevelopment())
-            {
-                // if true, this method catches and returns a developer friendly exception page
-                // also acts as a global exception handler and catches the exception and returns developer freindly exception page
-                app.UseDeveloperExceptionPage();
-            }
+            // // condition to check if we're running on development mode
+            // if (env.IsDevelopment())
+            // {
+            //     // if true, this method catches and returns a developer friendly exception page
+            //     // also acts as a global exception handler and catches the exception and returns developer freindly exception page
+            //     app.UseDeveloperExceptionPage();
+            // }
+
+            // Using our own middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // define cors policy to allow headers
             app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://localhost:4200"));

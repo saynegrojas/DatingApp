@@ -1,0 +1,11 @@
+<div class="container">
+<div class="card text-center">
+  <div class="card-header">
+    <h1 class="card-title">Page Not Found</h1>
+  </div>
+  <div class="card-body">
+    <!-- get error status from test error component -->
+    <h1 class="card-text" *ngIf="errorStatus" >{{errorStatus.status}}</h1>
+    <button class="btn btn-info" (click)="goBack()">Go goBack</button>
+  </div>
+</div>
