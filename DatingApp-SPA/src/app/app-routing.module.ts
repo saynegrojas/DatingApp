@@ -9,6 +9,9 @@ import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 
 import { AuthGuard } from './_guards/auth.guard';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 // add path & component to load
 const routes: Routes = [
@@ -25,12 +28,15 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
     ]
   },
+  { path: 'errors', component: TestErrorsComponent},
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent},
   // add route guard to path using canActiate passing the type of guard we would like to implement
   // { path: 'members', component: MemberListComponent, canActivate: [AuthGuard] },
   // { path: 'members/:id', component: MemberDetailComponent },
   // { path: 'lists', component: ListsComponent },
   // { path: 'messages', component: MessagesComponent },
-  { path: '**', component: HomeComponent, pathMatch: 'full' }
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
