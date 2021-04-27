@@ -1,4 +1,4 @@
-using DatingApp.API.Models;
+using DatingApp.API.Entities;
 
 namespace DatingApp.API.Interfaces
 {
@@ -6,6 +6,6 @@ namespace DatingApp.API.Interfaces
     {
         //  return string since JWT are just strings
         // receives entity user object
-        string CreateToken(Value user);
+        string CreateToken(AppUser user);
     }
 }

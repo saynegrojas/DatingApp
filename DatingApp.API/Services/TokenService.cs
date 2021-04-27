@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using DatingApp.API.Interfaces;
-using DatingApp.API.Models;
+using DatingApp.API.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,7 +23,7 @@ namespace DatingApp.API.Services
 
         }
         // implement interface 
-        public string CreateToken(Value user)
+        public string CreateToken(AppUser user)
         {
             // create claims
             var claims = new List<Claim> {

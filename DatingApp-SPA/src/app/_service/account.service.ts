@@ -20,10 +20,10 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
 
   // get list
-  private url = 'http://localhost:5000/api/';
+  private url = 'https://localhost:5001/api/';
 
   getUsers(): Observable<any> {
-    return this.http.get(this.url + 'values').pipe(tap((data) =>
+    return this.http.get(this.url + 'users').pipe(tap((data) =>
     console.log('All ' + JSON.stringify(data))),
     catchError(this.handleError)
     );

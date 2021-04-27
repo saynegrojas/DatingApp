@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
           // will now be an observable boolean
         this.toastr.error('Unauthorized');
       })
-    )
+    );
   }
 
 }

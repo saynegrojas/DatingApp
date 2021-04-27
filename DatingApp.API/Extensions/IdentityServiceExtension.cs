@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DatingApp.API.IdentityServiceExtension
+namespace DatingApp.API.Extensions
 {
     // will be adding all the services we added in startup regarding identities
     public static class IdentityServiceExtension

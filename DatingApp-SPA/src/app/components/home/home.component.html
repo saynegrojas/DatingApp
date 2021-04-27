@@ -1,12 +1,16 @@
 <div class="container">
   <!-- welcome area -->
   <!-- if registerMode is not false = show this section -->
-  <div *ngIf="!registerMode" style="text-align: center;">
+  <div *ngIf="!registerMode" style="text-align: center">
     <h1>Find your match</h1>
-    <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
+    <p class="lead">
+      Come on in to view your matches... all you need to do is sign up!
+    </p>
     <div class="text-center">
       <!-- toggle between registermodes -->
-      <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
+      <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">
+        Register
+      </button>
       <button class="btn btn-info btn-lg mr-2">Learn More</button>
     </div>
   </div>
@@ -28,7 +32,10 @@
             finally, pass in an event that the method will receive from the child componenet
             this will emit an event from the child up to the parent
           -->
-        <app-register [usersFromHome]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        <app-register
+          [usersFromHome]="users"
+          (cancelRegister)="cancelRegisterMode($event)"
+        ></app-register>
       </div>
     </div>
   </div>

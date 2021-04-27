@@ -1,5 +1,5 @@
 using DatingApp.API.Data;
-using DatingApp.API.Models;
+using DatingApp.API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +20,9 @@ namespace DatingApp.API.Controllers
         }
         [HttpGet("not-found")]
 
-        public ActionResult<Value>GetNotFound() {
+        public ActionResult<AppUser>GetNotFound() {
             // go to db check for a -1 primary key, return a NotFound
-            var thingToFind = _context.Values.Find(-1);
+            var thingToFind = _context.Users.Find(-1);
             if(thingToFind == null) return NotFound();
             return thingToFind;
         }
@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
 
         public ActionResult<string>GetServerError() {
             
-            var thingToFind = _context.Values.Find(-1);
+            var thingToFind = _context.Users.Find(-1);
             var thingToReturn = thingToFind.ToString();
             return thingToReturn;
         }

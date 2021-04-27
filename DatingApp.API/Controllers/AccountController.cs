@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DatingApp.API.Data;
 using DatingApp.API.DTOs;
 using DatingApp.API.Interfaces;
-using DatingApp.API.Models;
+using DatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +39,7 @@ namespace DatingApp.API.Controllers
             //need to make pw string into a btye array
             //generate pwhash - gives us a random generated key
             //generate pw salt - we set the pwhash to key
-            var user = new Value
+            var user = new AppUser
             {
                 // use tolower to compare username we get from registerDTO with passed in username
                 UserName = register.Username.ToLower(),
@@ -67,7 +67,7 @@ namespace DatingApp.API.Controllers
         {
             // find user in our db
             // we match the username from our db from the passed in username of our object
-            var user = await _context.Values.SingleOrDefaultAsync(x => x.UserName == login.Username);
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == login.Username);
 
             // check if username is null
             if (user == null) return Unauthorized("Invalid username");
@@ -94,7 +94,7 @@ namespace DatingApp.API.Controllers
         private async Task<bool> UserAlreadyExists(string username)
         {
             // make sure to use toLower to compare passed in username with username in DTO
-            return await _context.Values.AnyAsync(value => value.UserName == username.ToLower());
+            return await _context.Users.AnyAsync(value => value.UserName == username.ToLower());
         }
     }
 }
