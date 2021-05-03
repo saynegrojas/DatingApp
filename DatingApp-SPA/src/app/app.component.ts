@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   setCurrentUser() {
     // set current user to var & since we stringyfied the object as a JSON format, we are going to parse it to turn it back to original way
     const user: User = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+    // console.log(user);
     this.accountService.setCurrentUser(user);
   }
 }

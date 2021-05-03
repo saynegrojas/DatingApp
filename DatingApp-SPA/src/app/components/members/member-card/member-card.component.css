@@ -1,0 +1,56 @@
+.card:hover img {
+  transform: scale(1.2, 1.2);
+  transition: 500ms;
+  transition-timing-function: ease-out;
+  opacity: 0.6;
+}
+
+.card img {
+  transform: scale(1.0, 1.0);
+  transition: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.card-img-wrapper {
+  overflow: hidden;
+}
+
+/* .list-inline {
+  margin-bottom: 0.5rem;
+} */
+
+.btn {
+  /* padding: 5px 10px; */
+  font-size: 1rem;
+}
+.btn-primary {
+  padding: 5px 10px;
+  background-color: transparent;
+  color: #000;
+}
+
+.card-img-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+/* does not show in card */
+.member-icons {
+  position: absolute;
+  bottom: -30%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+}
+
+/* will show icons on hover */
+.card-img-wrapper:hover .member-icons {
+  bottom: 0;
+  opacity: 1;
+}
+
+.animate {
+  transition: all 0.4s ease-in-out;
+}

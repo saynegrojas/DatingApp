@@ -17,8 +17,7 @@ using DatingApp.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using DatingApp.API.ApplicationServiceExtension;
-using DatingApp.API.IdentityServiceExtension;
+using DatingApp.API.Extensions;
 using DatingApp.API.Middleware;
 
 namespace DatingApp.API
