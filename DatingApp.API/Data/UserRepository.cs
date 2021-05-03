@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -29,8 +30,9 @@ namespace DatingApp.API.Data
         public async Task<MemberDto> GetMemberByUsernameAsync(string username)
         {
             return await _context.Users
+            .Where(x => x.UserName == username)
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .SingleOrDefaultAsync();
+            .SingleOrDefaultAsync(x => x.Username == username);
         }
 
         // implementations Tasks need to be async
